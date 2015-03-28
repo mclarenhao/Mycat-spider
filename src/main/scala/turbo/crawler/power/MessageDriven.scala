@@ -31,10 +31,10 @@ import turbo.crawler.Fetchable
  *
  */
 trait MessageDriven {
-  def fireEvent(evt: Evt): Unit = EventManager.fireEvent(evt)
+  def fireEvent(evt: Any): Unit = EventManager.fireEvent(evt)
 }
 
-class Evt(evt_id: String, _source: Fetchable) {
+case class Evt(evt_id: String, _source: Fetchable) {
   def eventId = evt_id
   def source = _source
 

@@ -88,7 +88,8 @@ object EventManager extends Lifecycle with Logable with StringAdapter with Messa
   /**
    * 处理事件分发
    */
-  override def fireEvent(evt: Evt): Unit = {
+  override def fireEvent(arg: Any): Unit = {
+    val evt = arg.asInstanceOf[Evt]
     if (handlers.containsKey(evt.eventId)) new WrapList[Evt => Unit](handlers.get(evt.eventId)).foreach(fd => dispatchEventConcurrently(evt, fd)) else logger.error("No handlers for event" + evt)
   }
 
